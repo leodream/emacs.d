@@ -1,0 +1,6 @@
+# key: bean
+# name: <bean id="..." class="..."></bean>
+# --
+<bean id="$1" class="$2">
+  $0
+</bean>

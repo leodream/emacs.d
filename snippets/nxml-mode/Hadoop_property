@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Hadoop_property
+# key: property
+# --
+<property>
+   <name>$1</name>
+   <value>$2</value>
+</property>
+$0
