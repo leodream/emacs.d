@@ -127,3 +127,10 @@
 ;; coding: utf-8
 ;; no-byte-compile: t
 ;; End:
+
+;;----------------------------------------------------------------------------
+;; Goto-the-last-change
+;;----------------------------------------------------------------------------
+(load-file (expand-file-name "~/.emacs.d/goto-last-change.el"))
+(require 'goto-last-change)
+(global-set-key (kbd "C-x C-_") 'goto-last-change)
