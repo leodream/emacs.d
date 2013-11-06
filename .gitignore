@@ -30,3 +30,4 @@ custom.el.before*
 /eshell
 /plugins
 wget-log*
+/.achievements
