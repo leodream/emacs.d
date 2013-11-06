@@ -1,9 +1,10 @@
 (require-package 'goto-last-change)
 (require-package 'ecb)
 (require-package 'yasnippet)
-(require-package 'groovy-mode)
 (require-package 'emacs-eclim)
 (require-package 'company)
+(require-package 'gtags)
+
 
 ;; Goto-the-last-change
 (load-file (expand-file-name "~/.emacs.d/goto-last-change.el"))
@@ -20,41 +21,25 @@
 
 ;; YASnippet Setting
 (require 'yasnippet)
-(yas-global-mode 1)
 
-
-;; groovy-mode setting
-;; (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
-;; (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
-;; (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
-(add-auto-mode 'groovy-mode "\\.groovy\\'")
-
-;;; make Groovy mode electric by default.
-(add-hook 'groovy-mode-hook
-          '(lambda ()
-             (require 'groovy-electric)
-             (groovy-electric-mode)))
 
 
 ;; emacs-eclim setting
 (require 'eclim)
 (require 'eclimd)
-
-;; (custom-set-variables
-;;  '(eclim-eclipse-dirs '("~/Software/eclipse")))
+(global-eclim-mode t)
 
 ;; Variables
 (setq eclim-auto-save t
-      eclim-executable "/home/leo/Software/eclipse/eclim"
-      eclimd-executable "/home/leo/Software/eclipse/eclimd"
+      eclim-executable "d:/leo/software/eclipse-jee-kepler-SR1-win32-x86_64/eclipse/eclim.cmd"
+      eclimd-executable "d:/leo/software/eclipse-jee-kepler-SR1-win32-x86_64/eclipse/eclimd.cmd"
       eclimd-wait-for-process nil
-      eclimd-default-workspace "/home/leo/Program/MyEclipse 10backup"
+      eclimd-default-workspace "d:/leo/workspace"
       eclim-use-yasnippet nil
       help-at-pt-display-when-idle t
       help-at-pt-timer-delay 0.1
       )
 
-(add-auto-mode 'eclim-mode "\\.java\\'")
 
 ;; Hook eclim up with auto complete mode
 (require 'auto-complete-config)
@@ -66,6 +51,23 @@
 (require 'company-emacs-eclim)
 (company-emacs-eclim-setup)
 (global-company-mode t)
+
+;; Displaying compilation error messages in the echo area
+(setq help-at-pt-display-when-idle t)
+(setq help-at-pt-timer-delay 0.1)
+(help-at-pt-set-timer)
+
+
+;; GTags Setting
+(add-to-list 'load-path "~/.emacs.d/plugins/gnu_global_622wb/share/gtags/")
+
+(require 'gtags)
+(autoload 'gtags-mode "gtags-mode" "Loading GNU Global")
+(add-hook 'java-mode-hook '(lambda ()
+                             (gtags-mode t)
+                             (setq gtags-suggested-key-mapping t)))
+
+
 
 ;; re-open file if it is read-only
 ;; TODO cannot use this feature in ido-find-file
@@ -106,5 +108,12 @@
     (set-window-start nil window-start) )) ; nil - the selected window
 
 (global-linum-mode 1)
+
+;; Set tab symbol as 4 spaces
+(setq-default indent-tabs-mode nil)
+(setq default-tab-width 4)
+(setq tab-width 4)
+(setq c-basic-offset 4)
+(setq tab-stop-list ())
 
 (provide 'init-leo)
