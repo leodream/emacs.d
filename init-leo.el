@@ -4,26 +4,44 @@
 (require-package 'groovy-mode)
 (require-package 'emacs-eclim)
 (require-package 'company)
+(require-package 'popup-kill-ring)
+(require-package 'ggtags)
 
+;;----------------------------------------------------------------------------
 ;; Goto-the-last-change
+;;----------------------------------------------------------------------------
 (load-file (expand-file-name "~/.emacs.d/goto-last-change.el"))
 (require 'goto-last-change)
 (global-set-key (kbd "C-x C-_") 'goto-last-change)
 
 
+
+;;----------------------------------------------------------------------------
 ;; ECB Setting
+;;----------------------------------------------------------------------------
 (require 'ecb-autoloads)
 (custom-set-variables
  '(ecb-source-path (quote ("/home/leo/Program" ("/home/leo/Program/TestProject" "yes"))))
  '(ecb-windows-width 0.25))
 
+;; Make Winner mode runable after ecb-deactivate
+(add-hook 'ecb-deactivate-hook
+          '(lambda ()
+             (ecb-disable-advices 'ecb-winman-not-supported-function-advices t)))
 
+
+
+;;----------------------------------------------------------------------------
 ;; YASnippet Setting
+;;----------------------------------------------------------------------------
 (require 'yasnippet)
 (yas-global-mode 1)
 
 
+
+;;----------------------------------------------------------------------------
 ;; groovy-mode setting
+;;----------------------------------------------------------------------------
 ;; (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
 ;; (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 ;; (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
@@ -36,7 +54,10 @@
              (groovy-electric-mode)))
 
 
+
+;;----------------------------------------------------------------------------
 ;; emacs-eclim setting
+;;----------------------------------------------------------------------------
 (require 'eclim)
 (require 'eclimd)
 
@@ -67,8 +88,24 @@
 (company-emacs-eclim-setup)
 (global-company-mode t)
 
+
+
+;;----------------------------------------------------------------------------
+;; Tags Setting
+;;----------------------------------------------------------------------------
+(require 'ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p'c-mode 'c++-mode 'java-mode)
+              (ggtags-mode 1))))
+;; Go to the package description for more detial
+
+
+
+
+;;----------------------------------------------------------------------------
 ;; re-open file if it is read-only
-;; TODO cannot use this feature in ido-find-file
+;;----------------------------------------------------------------------------
 (defun th-rename-tramp-buffer ()
   (when (file-remote-p (buffer-file-name))
     (rename-buffer
