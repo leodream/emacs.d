@@ -31,8 +31,9 @@
 
 ;; Variables
 (setq eclim-auto-save t
-      eclim-executable "d:/leo/software/eclipse-jee-kepler-SR1-win32-x86_64/eclipse/eclim.cmd"
-      eclimd-executable "d:/leo/software/eclipse-jee-kepler-SR1-win32-x86_64/eclipse/eclimd.cmd"
+      ;; To make magit work, need to change to the bash shell.There for use the bash script instead of the bat here.
+      eclim-executable "d:/leo/software/eclipse-jee-kepler-SR1-win32-x86_64/eclipse/eclim"
+      eclimd-executable "d:/leo/software/eclipse-jee-kepler-SR1-win32-x86_64/eclipse/eclimd"
       eclimd-wait-for-process nil
       eclimd-default-workspace "d:/leo/workspace"
       eclim-use-yasnippet nil

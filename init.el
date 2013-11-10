@@ -7,6 +7,24 @@
 (defconst *spell-check-support-enabled* nil) ;; Enable with t if you prefer
 (defconst *is-a-mac* (eq system-type 'darwin))
 
+;; Need to also add this path to the "%PATH%" environment variable
+;; (setq explicit-shell-file-name
+;;       "C:/Program Files (x86)/Git/bin/bash.exe")
+;; (setq shell-file-name explicit-shell-file-name)
+;; (add-to-list 'exec-path "C:/Program Files (x86)/Git/bin")
+;; (setq grep-program "C:/Program Files (x86)/Git/bin/grep.exe")
+;; (setq find-program "C:/Program Files (x86)/Git/bin/find.exe")
+
+(setq explicit-shell-file-name
+      "d:/cygwin/bin/bash.exe")
+(setq shell-file-name explicit-shell-file-name)
+(add-to-list 'exec-path "d:/cygwin/bin")
+
+;; (setq grep-program "d:/cygwin/bin/grep.exe")
+;; (setq find-program "d:/cygwin/bin/find.exe")
+
+
+
 ;;----------------------------------------------------------------------------
 ;; Bootstrap config
 ;;----------------------------------------------------------------------------
@@ -129,3 +147,6 @@
 ;; End:
 
 (require 'init-leo)
+
+
+(provide 'init)
