@@ -94,6 +94,8 @@
 (require-package 'bug-reference-github)
 (add-hook 'prog-mode-hook 'bug-reference-prog-mode)
 
+;; force the use of the "fallback editor". Otherwise, magit-commit will open a new window on win7.
+(set-variable 'magit-emacsclient-executable nil)
 
 
 (provide 'init-git)
