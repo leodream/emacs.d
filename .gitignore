@@ -31,3 +31,5 @@ custom.el.before*
 /plugins
 wget-log*
 /.achievements
+/.achievements
+/.bookmarks.el
