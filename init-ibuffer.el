@@ -1,3 +1,6 @@
+(require-package 'fullframe)
+(fullframe ibuffer ibuffer-quit :ibuffer-fullscreen nil)
+
 (require-package 'ibuffer-vc)
 (require-package 'ibuffer-git)
 
