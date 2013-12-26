@@ -24,6 +24,25 @@
 
 
 
+
+;;; Groovy-mode Setting
+(load-file (expand-file-name "~/.emacs.d/plugins/Emacs-Groovy-Mode/groovy-mode.el"))
+(load-file (expand-file-name "~/.emacs.d/plugins/Emacs-Groovy-Mode/groovy-electric.el"))
+;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
+(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+(add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
+(add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
+
+;;; make Groovy mode electric by default.
+(add-hook 'groovy-mode-hook
+          '(lambda ()
+             (require 'groovy-electric)
+             (groovy-electric-mode)))
+
+
+
+
+
 ;; emacs-eclim setting
 (require 'eclim)
 (require 'eclimd)
@@ -65,10 +84,11 @@
 (require 'gtags)
 (autoload 'gtags-mode "gtags-mode" "Loading GNU Global")
 (add-hook 'java-mode-hook '(lambda ()
-                             (gtags-mode t)
-                             (setq gtags-suggested-key-mapping t)))
+                             (setq tab-width 4)
+                             (ggtags-mode t)))
 
-
+(add-hook 'nxml-mode-hook '(lambda ()
+                             (setq tab-width 4)))
 
 ;; re-open file if it is read-only
 ;; TODO cannot use this feature in ido-find-file
@@ -110,11 +130,5 @@
 
 (global-linum-mode 1)
 
-;; Set tab symbol as 4 spaces
-(setq-default indent-tabs-mode nil)
-(setq default-tab-width 4)
-(setq tab-width 4)
-(setq c-basic-offset 4)
-(setq tab-stop-list ())
 
 (provide 'init-leo)
