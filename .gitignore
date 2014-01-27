@@ -33,3 +33,4 @@ wget-log*
 /.achievements
 /.achievements
 /.bookmarks.el
+/history
