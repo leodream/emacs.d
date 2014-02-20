@@ -26,3 +26,6 @@ site-lisp/package/
 /frame-restore-parameters
 session.*
 custom.el.before*
+/server/server
+/eshell
+/plugins
