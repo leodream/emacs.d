@@ -130,6 +130,9 @@
                             ;; keybinding for inserting code blocks
                             (local-set-key (kbd "C-c s i")
                                            'org-insert-src-block)
+                            ;; turn on indent mode by default
+                            (org-indent-mode t)
                             ))
+
 
 (provide 'init-org)
