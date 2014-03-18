@@ -75,7 +75,7 @@
 
                       ("@offic" . ?o)
                       ("@home" . ?h)
-                      ("@pc" . ?p)
+                      ("@pc" . ?P)
 
                       (:newline . nil)
 
