@@ -64,7 +64,7 @@
                       ("S_term" . nil)
                       (:endgroup . nil)
 
-                      ("programming" . ?p)
+                      ("hacking" . ?p)
                       ("shell" . ?s)
                       ("emacs" . ?e)
                       ("linux" . ?L)
@@ -223,5 +223,6 @@
 (org-mobile-sync-enable)
 
 
+(require 'org-depend)
 
 (provide 'init-org)
