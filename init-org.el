@@ -19,7 +19,8 @@
       org-agenda-window-setup 'current-window
       org-fast-tag-selection-single-key 'expert
       org-export-kill-product-buffer-when-displayed t
-      org-tags-column 80)
+      org-tags-column 80
+      org-agenda-tags-column -100)
 
 
 ; Refile targets include this file and any file contributing to the agenda - up to 5 levels deep
