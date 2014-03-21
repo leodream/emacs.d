@@ -32,8 +32,8 @@
 
 
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEEDPLAN(p)" "NEXTACTION(n)" "|" "DONE(d!/!)")
-              (sequence "WAITING(w@/!)" "STARTED(s!)" "SOMEDAY(S)" "PROJECT(P@)" "|" "CANCELLED(c@/!)"))))
+      (quote ((sequence "TODO(t)" "NEEDPLAN(p)" "READY(r)" "|" "DONE(d!/!)")
+              (sequence "WAITING(w@/!)" "BEGINED(b!)" "SOMEDAY(s)" "PROJECT(P@)" "|" "CANCELLED(c@/!)"))))
 
 
 ;; Change TODO to DONE automatically after all subtask are done.
@@ -96,8 +96,8 @@
 (setq org-clock-persist t)
 (setq org-clock-in-resume t)
 
-;; Change task state to STARTED when clocking in
-(setq org-clock-in-switch-to-state "STARTED")
+;; Change task state to BEGINED when clocking in
+(setq org-clock-in-switch-to-state "BEGINED")
 ;; Save clock data and notes in the LOGBOOK drawer
 (setq org-clock-into-drawer t)
 ;; Removes clocked tasks with 0:00 duration
