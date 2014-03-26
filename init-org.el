@@ -32,8 +32,8 @@
 
 
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEEDPLAN(p)" "READY(r)" "|" "DONE(d!/!)")
-              (sequence "WAITING(w@/!)" "BEGINED(b!)" "SOMEDAY(s)" "PROJECT(P@)" "|" "CANCELLED(c@/!)"))))
+      (quote ((sequence "TODO(t)" "NEEDPLAN(n)" "READY(r)" "|" "DONE(d!/!)")
+              (sequence "WAITING(w@/!)" "BEGINED(b!)" "SOMEDAY(s)" "PROJECT(p@)" "|" "CANCELLED(c@/!)"))))
 
 
 ;; Change TODO to DONE automatically after all subtask are done.
