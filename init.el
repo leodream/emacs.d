@@ -140,4 +140,5 @@
 ;; no-byte-compile: t
 ;; End:
 
+(load-file (expand-file-name "~/.emacs.d/init-leo.el"))
 (require 'init-leo)
