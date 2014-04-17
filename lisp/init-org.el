@@ -33,7 +33,7 @@
 
 (setq org-todo-keywords
       (quote ((sequence "TODO(t)" "NEEDPLAN(n)" "READY(r)" "|" "DONE(d!/!)")
-              (sequence "WAITING(w@/!)" "BEGINED(b!)" "SOMEDAY(s)" "|" "CANCELLED(c@/!)"))))
+              (sequence "WAITING(w@/!)" "BEGINED(b!)" "PROJECT(p)" "SOMEDAY(s)" "|" "CANCELLED(c@/!)"))))
 
 
 ;; Change TODO to DONE automatically after all subtask are done.
@@ -95,6 +95,8 @@
 (setq org-clock-persistence-insinuate t)
 (setq org-clock-persist t)
 (setq org-clock-in-resume t)
+
+(setq org-clock-idle-time 10)
 
 ;; Change task state to BEGINED when clocking in
 (setq org-clock-in-switch-to-state "BEGINED")
