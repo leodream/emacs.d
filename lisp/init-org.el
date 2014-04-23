@@ -9,6 +9,9 @@
 (define-key global-map (kbd "C-c l") 'org-store-link)
 (define-key global-map (kbd "C-c a") 'org-agenda)
 
+(setq org-agenda-files (quote ("~/Dropbox/notes/TODOList.org")))
+(setq org-directory "/home/leo/Dropbox/notes")
+
 ;; Various preferences
 (setq org-log-done t
       org-completion-use-ido t
@@ -43,7 +46,6 @@
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-
 
 (setq org-tag-persistent-alist '((:startgroup . nil)
                       ("acg" . ?A)
@@ -85,6 +87,18 @@
                       ("#URGENT#" . ?U)
 
                       ))
+
+
+;; Strike through headlines for DONE tasks in Org
+;; http://sachachua.com/blog/2012/12/emacs-strike-through-headlines-for-done-tasks-in-org/
+(setq org-fontify-done-headline t)
+(custom-set-faces
+ '(org-done ((t (:foreground "PaleGreen"
+                 :weight normal
+                 :strike-through t))))
+ '(org-headline-done
+            ((((class color) (min-colors 16) (background dark))
+               (:foreground "LightSalmon" :strike-through t)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -192,8 +206,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mobile Org
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq org-agenda-files (quote ("~/Dropbox/notes/TODOList.org")))
-(setq org-directory "/home/leo/Dropbox/notes")
 (setq org-enforce-todo-dependencies t)
 (setq org-mobile-directory "~/Dropbox/mobileorg")
 (setq org-mobile-inbox-for-pull "~/Dropbox/mobileorg/from-mobil.org")
