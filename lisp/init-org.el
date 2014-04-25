@@ -35,7 +35,7 @@
 
 
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "NEEDPLAN(n)" "READY(r)" "|" "DONE(d!/!)")
+      (quote ((sequence "TODO(t)" "TOBREAKDOWN(o)" "READY(r)" "|" "DONE(d!/!)")
               (sequence "WAITING(w@/!)" "BEGINED(b!)" "PROJECT(p)" "SOMEDAY(s)" "|" "CANCELLED(c@/!)"))))
 
 
@@ -51,7 +51,7 @@
                       ("acg" . ?A)
                       (:grouptags . nil)
                       ("animate" . ?a)
-                      ("comics" . ?c)
+                      ("comics" . ?C)
                       ("game" . nil)
                       ("music" . ?m)
                       (:endgroup . nil)
@@ -67,7 +67,7 @@
                       ("S_term" . nil)
                       (:endgroup . nil)
 
-                      ("hacking" . ?p)
+                      ("coding" . ?c)
                       ("shell" . ?s)
                       ("emacs" . ?e)
                       ("linux" . ?L)
@@ -87,6 +87,74 @@
                       ("#URGENT#" . ?U)
 
                       ))
+
+(defun sacha/org-agenda-skip-scheduled ()
+  (org-agenda-skip-entry-if 'scheduled 'deadline 'regexp "\n]+>"))
+
+(defvar sacha/org-agenda-limit-items nil "Number of items to show in agenda to-do views; nil if unlimited.")
+
+(defvar sacha/org-agenda-contexts
+  '((tags-todo "+@learn")
+    (tags-todo "+@work")
+    (tags-todo "+@reading")
+    (tags-todo "+@hacking")
+    (tags-todo "+@computer")
+    (tags-todo "+@home"))
+  "Usual list of contexts.")
+
+(setq org-agenda-custom-commands
+      '(
+        ("u" "Timeline for today and tasks that under going"
+         ((agenda "" )
+          (todo "BEGINED")
+          (todo "READY"))
+         ((org-agenda-ndays 1)
+          (org-agenda-show-log t)
+          (org-agenda-clockreport-mode t)
+          (org-agenda-log-mode-items '(clock closed))))
+
+        ("w" "Weekly Review"
+         ((agenda ""
+                  ((org-agenda-ndays 7)          ;; review upcoming deadlines and appointments
+                   (org-agenda-show-log t)
+;;                   (org-agenda-start-on-weekday 1) ;; agenda start with monday
+                   (org-agenda-log-mode-items '(clock closed))
+                   (org-agenda-clockreport-mode t)
+                   (org-agenda-repeating-timestamp-show-all nil)));; ensures that repeating events appear only once
+
+          (todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
+          (tags-todo "-SCHEDULED={.+}/+BEGINED")
+          (tags-todo "-SCHEDULED={.+}/+READY")
+          (tags-todo "-SCHEDULED={.+}/+WAITING")
+          (tags-todo "-SCHEDULED={.+}/+TOBREAKDOWN")
+          (tags-todo "-SCHEDULED={.+}/+SOMEDAY")
+          (tags-todo "-SCHEDULED={.+}/+TODO")))
+
+        ("x" "Items that under going" todo "READY|BEGINED")
+
+        ("P" "By priority"
+         ((tags-todo "+PRIORITY=\"A\"")
+          (tags-todo "+PRIORITY=\"B\"")
+          (tags-todo "+PRIORITY=\"\"")
+          (tags-todo "+PRIORITY=\"C\""))
+         ((org-agenda-prefix-format "%-10c %-10T %e ")
+          (org-agenda-sorting-strategy '(priority-down tag-up category-keep effort-down))))
+
+        ("g" . "Go to specific category")
+        ("ge" "Entertainment" tags-todo "CATEGORY=\"Play\"")
+        ("gw" "Work" tags-todo "CATEGORY=\"Work\"")
+        ("gl" "Learn" tags-todo "CATEGORY=\"Learn\"")
+        ("gL" "Life" tags-todo "CATEGORY=\"Life\"")
+        ("gp" "Practice" tags-todo "CATEGORY=\"Practice\"")
+
+        ("n" "Agenda and all TODO's"
+         ((agenda ""
+                  ((org-agenda-ndays 7)
+                   (org-agenda-show-log t)
+                   ))
+          (tags-todo "/-TOBREAKDOWN-SOMEDAY")))
+
+        ))
 
 
 ;; Strike through headlines for DONE tasks in Org
