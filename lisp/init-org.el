@@ -43,7 +43,7 @@
 (defun org-summary-todo (n-done n-not-done)
   "Switch entry to DONE when all subentries are done, to TODO otherwise."
   (let (org-log-done org-log-states)   ; turn off logging
-    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+    (org-todo (if (= n-not-done 0) "DONE" "PROJECT"))))
 
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
 
@@ -106,8 +106,13 @@
       '(
         ("u" "Timeline for today and tasks that under going"
          ((agenda "" )
+          (todo "PROJECT")
           (todo "BEGINED")
-          (todo "READY"))
+          (todo "READY")
+          (todo "WAITING")
+          (todo "TOBREAKDOWN")
+          (todo "SOMEDAY")
+          (todo "TODO"))
          ((org-agenda-ndays 1)
           (org-agenda-show-log t)
           (org-agenda-clockreport-mode t)
