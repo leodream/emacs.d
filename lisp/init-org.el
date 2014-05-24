@@ -8,9 +8,11 @@
 
 (define-key global-map (kbd "C-c l") 'org-store-link)
 (define-key global-map (kbd "C-c a") 'org-agenda)
+(define-key global-map (kbd "C-c c") 'org-capture)
 
 (setq org-agenda-files (quote ("~/Dropbox/notes/TODOList.org")))
 (setq org-directory "/home/leo/Dropbox/notes")
+(setq org-default-notes-file (concat org-directory "/capture.org"))
 
 ;; Various preferences
 (setq org-log-done t
@@ -310,6 +312,28 @@
   (cancel-timer org-mobile-sync-timer))
 (org-mobile-sync-enable)
 
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org Capture
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq org-capture-templates
+      '(("t" "Normal TODO item with a link"
+         entry (file+headline "~/Dropbox/notes/TODOList.org" "Life")
+         "* %^{prompt|READY|TODO|BEGINED|TOBREAKDOWN|SOMEDAY} %? %^g\n%i\n %a")
+
+        ("d" "Log the task that already done"
+         entry (file "~/Dropbox/notes/TODOList.org")
+         "* %^{prompt|DONE|BEGINED} %? %^g\n:LOGBOOK:\nCLOCK: %^U--%^U\n:END:\n%i\n %a" :clock-keep t)
+
+        ("b" "Log the task that already begined"
+         entry (file "~/Dropbox/notes/TODOList.org")
+         "* BEGINED %? %^g\n:LOGBOOK:\nCLOCK: %^U\n:END:\n%i\n %a" :clock-in t :clock-resume t)
+
+        ("c" "add checkItem"
+         checkitem (file "~/Dropbox/notes/TODOList.org")
+         "- [ ] %? %a %i")
+        ))
 
 (require 'org-depend)
 
