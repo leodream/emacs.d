@@ -109,13 +109,9 @@
       '(
         ("u" "Timeline for today and tasks that under going"
          ((agenda "" )
-          (todo "PROJECT")
           (todo "BEGINED")
           (todo "READY")
-          (todo "WAITING")
-          (todo "TOBREAKDOWN")
-          (todo "SOMEDAY")
-          (todo "TODO"))
+          (todo "WAITING"))
          ((org-agenda-ndays 1)
           (org-agenda-show-log t)
           (org-agenda-clockreport-mode t)
@@ -136,7 +132,9 @@
           (tags-todo "-SCHEDULED={.+}/+WAITING")
           (tags-todo "-SCHEDULED={.+}/+TOBREAKDOWN")
           (tags-todo "-SCHEDULED={.+}/+SOMEDAY")
-          (tags-todo "-SCHEDULED={.+}/+TODO")))
+          (tags-todo "-SCHEDULED={.+}/+TODO")
+          (todo "DONE")
+          (todo "CANCELLED")))
 
         ("x" "Items that under going" todo "READY|BEGINED")
 
