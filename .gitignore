@@ -35,3 +35,4 @@ wget-log*
 /.bookmarks.el
 /history
 /helm-adaptive-history
+/projectile-bookmarks.eld
