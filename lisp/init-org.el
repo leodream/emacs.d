@@ -5,7 +5,6 @@
   (require-package 'org-mac-link)
   (require-package 'org-mac-iCal))
 
-
 (define-key global-map (kbd "C-c l") 'org-store-link)
 (define-key global-map (kbd "C-c a") 'org-agenda)
 (define-key global-map (kbd "C-c c") 'org-capture)
@@ -14,6 +13,9 @@
 
 (setq org-directory "/home/leo/Dropbox/notes")
 (setq org-default-notes-file (concat org-directory "/capture.org"))
+
+(require 'org-habit)
+(add-to-list 'org-modules "org-habit")
 
 ;; Various preferences
 (setq org-log-done t
@@ -26,7 +28,11 @@
       org-fast-tag-selection-single-key 'expert
       org-export-kill-product-buffer-when-displayed t
       org-tags-column 80
-      org-agenda-tags-column -100)
+      org-agenda-tags-column -100
+      org-habit-following-days 3
+      org-habit-preceding-days 14
+      org-habit-graph-column 100
+      org-habit-show-habits-only-for-today nil)
 
 
 ; Refile targets include this file and any file contributing to the agenda - up to 5 levels deep
@@ -38,15 +44,18 @@
 
 
 (setq org-todo-keywords
-      (quote ((sequence "TODO(t)" "TOBREAKDOWN(o)" "READY(r)" "|" "DONE(d!/!)")
-              (sequence "WAITING(w@/!)" "BEGINED(b!)" "PROJECT(p)" "SOMEDAY(s)" "|" "CANCELLED(c@/!)"))))
+      (quote ((sequence "TODO(t)" "SOMEDAY(s)" "READY(r)" "BEGINED(b!)" "|" "DONE(d!/!)")
+              (sequence "WAITING(w@/!)" "TOBREAKDOWN(o)" "PROJECT(p)" "REPEATING(R/!)" "|" "CANCELLED(c@/!)"))))
+
+(setq org-todo-repeat-to-state "REPEATING")
 
 (setq org-todo-keyword-faces
       '(("PROJECT" . "cyan")
         ("TODO" . "red")
-        ("TOBREAKDOWN" . "yellow")
+        ("TOBREAKDOWN" . "tomato")
         ("SOMEDAY" . "chocolate")
-        ("WAITING" . "goldenrod")
+        ("WAITING" . "sandy brown")
+        ("REPEATING" . "goldenrod")
         ("READY" . "khaki")
         ("BEGINED" . "yellow green")
         ))
@@ -136,6 +145,7 @@
          ((agenda "" )
           (todo "BEGINED")
           (todo "READY")
+          (todo "REPEATING")
           (todo "WAITING"))
          ((org-agenda-ndays 1)
           (org-agenda-show-log t)
@@ -152,12 +162,13 @@
                    (org-agenda-repeating-timestamp-show-all nil)));; ensures that repeating events appear only once
 
           (todo "PROJECT") ;; review all projects (assuming you use todo keywords to designate projects)
-          (tags-todo "-SCHEDULED={.+}/+BEGINED")
-          (tags-todo "-SCHEDULED={.+}/+READY")
-          (tags-todo "-SCHEDULED={.+}/+WAITING")
-          (tags-todo "-SCHEDULED={.+}/+TOBREAKDOWN")
-          (tags-todo "-SCHEDULED={.+}/+SOMEDAY")
-          (tags-todo "-SCHEDULED={.+}/+TODO")
+          (todo "BEGINED")
+          (todo "READY")
+          (todo "REPEATING")
+          (todo "WAITING")
+          (todo "SOMEDAY")
+          (todo "TOBREAKDOWN")
+          (todo "TODO")
           (todo "DONE")
           (todo "CANCELLED")))
 
