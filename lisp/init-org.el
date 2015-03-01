@@ -19,6 +19,7 @@
 
 ;; Various preferences
 (setq org-log-done t
+      org-outline-path-complete-in-steps nil
       org-completion-use-ido t
       org-edit-timestamp-down-means-later t
       org-agenda-start-on-weekday nil
